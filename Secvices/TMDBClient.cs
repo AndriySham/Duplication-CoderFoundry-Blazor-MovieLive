@@ -21,5 +21,10 @@ namespace BlazorMovieLive.Secvices
         {
             return _httpClient.GetFromJsonAsync<PopularMoviePagedResponse>("movie/popular");
         }
+
+        public Task<MovieDetails?> GetMovieDatailsAsync(int id)
+        {
+            return _httpClient.GetFromJsonAsync<MovieDetails>($"movie/{id}");
+        }
     }
 }
