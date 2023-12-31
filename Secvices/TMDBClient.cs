@@ -17,9 +17,11 @@ namespace BlazorMovieLive.Secvices
             _httpClient.DefaultRequestHeaders.Authorization = new("Bearer", apiKey);
         }
 
-        public Task<PopularMoviePagedResponse?> GetPopularMoviesAsync()
+        public Task<PopularMoviePagedResponse?> GetPopularMoviesAsync(int page = 1)
         {
-            return _httpClient.GetFromJsonAsync<PopularMoviePagedResponse>("movie/popular");
+            if (page < 1) page = 1;
+            if (page > 500) page = 500;
+            return _httpClient.GetFromJsonAsync<PopularMoviePagedResponse>($"movie/popular?page={page}");
         }
 
         public Task<MovieDetails?> GetMovieDatailsAsync(int id)
